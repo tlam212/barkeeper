@@ -21,7 +21,8 @@ class Drink{
       })
     }
 
-    static addNewDrink(){
+    static addNewDrink(event){
+        event.preventDefault()
         let drinkFormData = {
           name:event.target[0].value,
           recipe:event.target[1].value,
