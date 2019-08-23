@@ -22,23 +22,42 @@ class Drink{
     }
 
     static addNewDrink(){
-      let drinkFormData = {
-        name:event.target[0].value,
-        recipe:event.target[1].value,
-        image: event.target[2].value
+        let drinkFormData = {
+          name:event.target[0].value,
+          recipe:event.target[1].value,
+          image: event.target[2].value
+        }
+        fetch(DRINK_URL, {
+          method: "POST",
+          headers: {"Content-Type":"application/json"},
+          body: JSON.stringify(drinkFormData)
+        }).then(resp => resp.json())
+          .then(drinkFormData => {
+            let new_drink = new Drink(drinkFormData)
+            new_drink.renderToDom()
+          })
+     }
+
+
+     fetchDrinkReviews(event){
+       if(event.target.tagName === 'BUTTON'){
+       fetch(`http://localhost:3000/drinks/${this.id}`)
+       .then(resp => resp.json())
+       .then(drink => this.renderReviewsToDom(drink))
       }
-      fetch(DRINK_URL, {
-        method: "POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify(drinkFormData)
-      }).then(resp => resp.json())
-        .then(drinkFormData => {
-          let new_drink = new Drink(drinkFormData)
-          new_drink.renderToDom()
+     }
+
+     renderReviewsToDom(drink){
+       let h3Tag = document.createElement('h3')
+       let reviewDiv = document.querySelector('.review')
+       h3Tag.innerText = `${this.name} reviews:`
+       reviewDiv.prepend(h3Tag)
+       drink.reviews.map(review => {
+            let pTag = document.createElement('p')
+            pTag.innerHTML += `<em>"${review.comment}" ~ ${review.name}</em>`
+            reviewDiv.appendChild(pTag)
         })
-
-
-    }
+     }
 
 
     renderToDom(){
@@ -68,9 +87,9 @@ class Drink{
       mainContainerDiv.append(theCardDiv)
       container.append(mainContainerDiv)
 
-      // backDiv.addEventListener('click', () => {
-      //   this.fetchDrinkReviews(event)
-      // })
+      backDiv.addEventListener('click', () => {
+        this.fetchDrinkReviews(event)
+      })
 
     }
 
