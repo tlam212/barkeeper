@@ -1,0 +1,73 @@
+* {
+	font-family: Oswald;
+}
+h1 {
+	font-family: Oswald;
+	font-size: 25px;
+	font-weight: 800;
+	text-transform: uppercase;
+	width: 30%;
+}
+.title {
+  margin-left: 1.66%;
+  border-bottom: 2px solid #f1f1f1;
+}
+h2 {
+	text-align: center;
+}
+
+.mainContainer {
+  position: relative;
+  width: 400px;
+  height: 520px;
+  float: left;
+  margin: 1.66%;
+
+}
+
+.theCard {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease;
+
+}
+.front {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  background: #fffafa;
+}
+ .theCard:hover {
+   transform: rotateY(180deg);
+ }
+.newCard {
+  margin: 1.66%;
+}
+
+.frontPage {
+  text-align: center;
+}
+.mainPage {
+  text-align: center;
+  font-family: Oswald;
+	font-size: 25px;
+	font-weight: 800;
+	text-transform: uppercase;
+	width: 100%;
+}
+.commentDiv{
+	margin-top: 30px;
+}
+.commentLi {
+	list-style-type: none;
+}
