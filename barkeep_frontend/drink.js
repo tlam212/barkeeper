@@ -15,10 +15,29 @@ class Drink{
       .then(resp => resp.json())
       .then(drinks => {
         drinks.forEach(drink =>{
-          let new_drink = new Drink(drink)
-          new_drink.renderToDom(drink)
+          let drinkCard = new Drink(drink)
+          drinkCard.renderToDom(drink)
         })
       })
+    }
+
+    static addNewDrink(){
+      let drinkFormData = {
+        name:event.target[0].value,
+        recipe:event.target[1].value,
+        image: event.target[2].value
+      }
+      fetch(DRINK_URL, {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(drinkFormData)
+      }).then(resp => resp.json())
+        .then(drinkFormData => {
+          let new_drink = new Drink(drinkFormData)
+          new_drink.renderToDom()
+        })
+
+
     }
 
 
